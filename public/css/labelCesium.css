@@ -1,0 +1,22 @@
+
+.labelCesium{
+    position: absolute;
+    font: 16px sans-serif;
+    padding: 1px 10px 0 10px;
+    border-radius: 10px;
+    color: white;
+}
+.label-link{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.label-link > i{
+    margin-left:5px;
+}
+.label-point{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: red !important;
+}

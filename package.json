@@ -1,0 +1,31 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "devDependencies": {
+        "axios": "^0.25",
+        "laravel-mix": "^6.0.49",
+        "lodash": "^4.17.19",
+        "postcss": "^8.1.14",
+        "webpack-cli": "^5.1.4"
+    },
+    "dependencies": {
+        "cesium": "1.114.0",
+        "cesium-extends": "^1.8.14",
+        "child_process": "^1.0.2",
+        "fs": "^0.0.1-security",
+        "https": "^1.0.0",
+        "https-browserify": "^1.0.0",
+        "path": "^0.12.7",
+        "stream": "^0.0.2",
+        "stream-http": "^3.2.0",
+        "zlib": "^1.0.5"
+    }
+}
