@@ -78,7 +78,7 @@
         <div id="cesiumContainer"></div>
         <div id="toolbar">
             <div class="button-group">
-                <button id="mainButton">Main Button</button>
+                {{-- <button id="mainButton">Main Button</button> --}}
                 {{-- <button class="btn_icon animate__animated">Button</button>
                 <button class="btn_icon animate__animated">Button 2</button>
                 <button class="btn_icon animate__animated">Button 3</button>
@@ -86,7 +86,7 @@
                 <button class="btn_icon animate__animated">Button 3</button>
                 <button class="btn_icon animate__animated">Button 3</button>
                 <button class="btn_icon animate__animated">Button 3</button> --}}
-
+{{-- 
                 <button id="distance" type="button" class="cesium-button btn_icon animate__animated">Distance</button>
                 <button id="component-Distance" type="button" class="cesium-button btn_icon animate__animated">Component
                     Distance</button>
@@ -99,7 +99,11 @@
                 <button id="height-From-Terrain" type="button" class="cesium-button btn_icon animate__animated">Height From
                     Terrain</button>
                 <button id="area" type="button" class="cesium-button btn_icon animate__animated">Area</button>
-                <button id="point" type="button" class="cesium-button btn_icon animate__animated">Point</button>
+                <button id="point" type="button" class="cesium-button btn_icon animate__animated">Point</button> --}}
+            </div>
+            <div>
+                <button id="loadData1">Tileset</button>
+                <button id="loadData2">Line</button>
             </div>
         </div>
     </div>
@@ -155,6 +159,34 @@
                 });
             }
         });
+
+        $(document).on('click', '#loadData1', async function() {
+            const assetId = 847734;
+            try {
+                let tileset = viewer.scene.primitives._primitives.find(p => p.assetId === assetId);
+                if (!tileset) {
+                    tileset = await Cesium.Cesium3DTileset.fromIonAssetId(assetId);
+                    viewer.scene.primitives.add(tileset);
+                }
+                await viewer.zoomTo(tileset);
+            } catch (error) {
+                console.log('error', error);
+            }
+        })
+
+        $(document).on('click', '#loadData2', async function() {
+            try {
+                const resource = await Cesium.IonResource.fromAssetId(2629997);
+                const dataSource = await Cesium.KmlDataSource.load(resource, {
+                camera: viewer.scene.camera,
+                canvas: viewer.scene.canvas,
+            });
+                await viewer.dataSources.add(dataSource);
+                await viewer.zoomTo(dataSource);
+            } catch (error) {
+                console.log(error);
+            }
+        })
 
 
         // End Siderbar
