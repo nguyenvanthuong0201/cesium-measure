@@ -3,7 +3,7 @@
 @section('title', '道路管理情報システム')
 
 @section('css')
-    <style>
+    {{-- <style>
         .scroll_bar {
             overflow-x: auto;
             overflow-y: auto;
@@ -70,15 +70,15 @@
             left: calc(50px + var(--sidebar, 0px));
             background: whitesmoke;
         }
-    </style>
+    </style> --}}
 @endsection
 @section('content')
-    @include('map.sidebar')
+    {{-- @include('map.sidebar') --}}
     <div id="mapContainer" class="height-100 bg-light relative">
         <div id="cesiumContainer"></div>
         <div id="toolbar">
             <div class="button-group">
-                {{-- <button id="mainButton">Main Button</button> --}}
+                <button id="mainButton">Main Button</button>
                 {{-- <button class="btn_icon animate__animated">Button</button>
                 <button class="btn_icon animate__animated">Button 2</button>
                 <button class="btn_icon animate__animated">Button 3</button>
@@ -86,7 +86,7 @@
                 <button class="btn_icon animate__animated">Button 3</button>
                 <button class="btn_icon animate__animated">Button 3</button>
                 <button class="btn_icon animate__animated">Button 3</button> --}}
-{{-- 
+
                 <button id="distance" type="button" class="cesium-button btn_icon animate__animated">Distance</button>
                 <button id="component-Distance" type="button" class="cesium-button btn_icon animate__animated">Component
                     Distance</button>
@@ -99,12 +99,12 @@
                 <button id="height-From-Terrain" type="button" class="cesium-button btn_icon animate__animated">Height From
                     Terrain</button>
                 <button id="area" type="button" class="cesium-button btn_icon animate__animated">Area</button>
-                <button id="point" type="button" class="cesium-button btn_icon animate__animated">Point</button> --}}
+                <button id="point" type="button" class="cesium-button btn_icon animate__animated">Point</button>
             </div>
-            <div>
+            {{-- <div>
                 <button id="loadData1">Tileset</button>
                 <button id="loadData2">Line</button>
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection
@@ -112,25 +112,25 @@
 @section('js')
     <script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>
     <script>
-        // Start Siderbar
-        const sidebarWidth = 70; // Width when sidebar is collapsed
-        const expandedSidebarWidth = 320; // Width when sidebar is expanded
+        // // Start Siderbar
+        // const sidebarWidth = 70; // Width when sidebar is collapsed
+        // const expandedSidebarWidth = 320; // Width when sidebar is expanded
 
-        const setFullSize = () => {
-            const vh = window.innerHeight * 0.01;
-            const vw = window.innerWidth * 0.01;
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
-            document.documentElement.style.setProperty('--vw', `${vw}px`);
+        // const setFullSize = () => {
+        //     const vh = window.innerHeight * 0.01;
+        //     const vw = window.innerWidth * 0.01;
+        //     document.documentElement.style.setProperty('--vh', `${vh}px`);
+        //     document.documentElement.style.setProperty('--vw', `${vw}px`);
 
-            if ($('#navBodyItems').hasClass('d-none')) {
-                document.documentElement.style.setProperty('--sidebar', `${sidebarWidth}px`);
-            } else {
-                document.documentElement.style.setProperty('--sidebar', `${expandedSidebarWidth}px`);
-            }
-        };
+        //     if ($('#navBodyItems').hasClass('d-none')) {
+        //         document.documentElement.style.setProperty('--sidebar', `${sidebarWidth}px`);
+        //     } else {
+        //         document.documentElement.style.setProperty('--sidebar', `${expandedSidebarWidth}px`);
+        //     }
+        // };
 
-        window.addEventListener('resize', setFullSize);
-        setFullSize();
+        // window.addEventListener('resize', setFullSize);
+        // setFullSize();
 
         $(document).on('click', '#navMain a', function(e) {
             e.preventDefault();
@@ -178,9 +178,9 @@
             try {
                 const resource = await Cesium.IonResource.fromAssetId(2629997);
                 const dataSource = await Cesium.KmlDataSource.load(resource, {
-                camera: viewer.scene.camera,
-                canvas: viewer.scene.canvas,
-            });
+                    camera: viewer.scene.camera,
+                    canvas: viewer.scene.canvas,
+                });
                 await viewer.dataSources.add(dataSource);
                 await viewer.zoomTo(dataSource);
             } catch (error) {
@@ -264,23 +264,27 @@
 
         // Start Measure
 
-        const gl = viewer.scene.context._gl;
-        const maxTextureSize = gl.getParameter(gl.MAX_TEXTURE_SIZE);
+        const gl = document.createElement('canvas').getContext('webgl');
+        const maxTextureSize1 = gl.getParameter(gl.MAX_TEXTURE_SIZE);
+        console.log('Maximum Texture Size Supported1:', maxTextureSize1);
+
+        const gl1 = viewer.scene.context._gl;
+        const maxTextureSize = gl1.getParameter(gl1.MAX_TEXTURE_SIZE);
         console.log("Maximum Texture Size Supported:", maxTextureSize);
 
         // $(document).on('click', '#distance', async function() {
         //     try {
-        //         const areaMeasure = new AreaMeasure(viewer, {
-        //             onEnd: (entity) => {
-        //                 console.log(entity); // 测量完成回调函数，返回测量结果
-        //             },
-        //         });
-        //         areaMeasure.start();
+                // const areaMeasure = new AreaMeasure(viewer, {
+                //     onEnd: (entity) => {
+                //         console.log(entity); // 测量完成回调函数，返回测量结果
+                //     },
+                // });
+                // areaMeasure.start();
         //     } catch (error) {
         //         console.error("Error while starting area measure:", error);
         //     }
-
         // });
+
 
         // End Measure
     </script>

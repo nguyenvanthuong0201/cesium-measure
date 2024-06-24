@@ -11,8 +11,8 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/images/logo.png') }}">
     <!-- CSS -->
     {{-- <link rel="stylesheet" href="{{ asset('/css/app.css') }}"> --}}
-    <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/labelCesium.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('/css/style.css') }}"> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('/css/labelCesium.css') }}"> --}}
     @yield('css')
 
     <!-- Icon -->
@@ -51,9 +51,11 @@
 <body>
     {{-- Main Content --}}
     <section class="main" id="main">
+        <div id="cesiumContainer"></div>
+{{-- 
         <div class="d-flex">
             @yield('content')
-        </div>
+        </div> --}}
     </section>
     {{-- LOADING --}}
     <div id="loading" style="display: none">
